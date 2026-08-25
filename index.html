@@ -82,17 +82,17 @@
   }
   .hero-photo{
     position:relative;
-    aspect-ratio:16/10;
+    aspect-ratio:5/4;
     overflow:hidden;
     /* foto weich in den hintergrund ausblenden statt hart abschneiden */
-    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 46%,rgba(0,0,0,.5) 78%,transparent 100%);
-    mask-image:linear-gradient(180deg,#000 0%,#000 46%,rgba(0,0,0,.5) 78%,transparent 100%);
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,.5) 84%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,.5) 84%,transparent 100%);
   }
   .hero-photo img{
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center 38%;
+    object-position:center 42%;
     display:block;
     animation:slowdrift 26s ease-in-out infinite alternate;
   }
@@ -282,16 +282,8 @@
   /* ---------- lyrics ---------- */
   .lyrics{margin-top:4.5rem}
 
-  .stanza{margin-bottom:2.9rem}
-
-  .label{
-    font-size:.62rem;
-    letter-spacing:.34em;
-    text-transform:uppercase;
-    color:var(--cream-45);
-    margin-bottom:.85rem;
-    padding-left:.34em;
-  }
+  /* ohne ueberschriften traegt allein der abstand die gliederung */
+  .stanza{margin-bottom:3.5rem}
 
   .stanza p{
     font-size:1.02rem;
@@ -310,7 +302,6 @@
     padding-left:1.15rem;
     border-left:1px solid rgba(255,176,58,.42);
   }
-  .stanza.chorus .label{color:var(--gold)}
   .stanza.chorus p{
     font-style:italic;
     color:#fff4e4;
@@ -331,15 +322,20 @@
     line-height:1.5;
     color:var(--cream);
   }
-  .sig-note{
-    margin-top:.9rem;
-    font-size:.8rem;
-    font-style:italic;
-    color:var(--cream-45);
-    text-wrap:balance;
-    max-width:20rem;
-    margin-left:auto;
-    margin-right:auto;
+  .heart{
+    display:block;
+    width:1.8rem;
+    height:1.8rem;
+    margin:2rem auto 0;
+    filter:drop-shadow(0 0 .9rem rgba(255,176,58,.5));
+    animation:beat 4.5s ease-in-out infinite;
+  }
+  @keyframes beat{
+    0%,100%{transform:scale(1)}
+    6%{transform:scale(1.15)}
+    13%{transform:scale(1)}
+    20%{transform:scale(1.09)}
+    28%{transform:scale(1)}
   }
 
   /* ---------- reveal ---------- */
@@ -358,13 +354,14 @@
     .r{animation:none;opacity:1;transform:none}
     .hero-photo img{animation:none}
     .play-btn::before{animation:none}
+    .heart{animation:none}
     *{transition-duration:.01ms !important}
   }
 
   @media (min-width:35rem){
     .wrap{padding-left:2rem;padding-right:2rem}
     .hero{margin-left:-2rem;margin-right:-2rem}
-    .hero-photo{aspect-ratio:16/9;border-radius:0}
+    .hero-photo{aspect-ratio:3/2;border-radius:0}
   }
 </style>
 </head>
@@ -406,7 +403,6 @@
   <main class="lyrics">
 
     <div class="stanza">
-      <p class="label">Strophe</p>
       <p>
         <span class="v">Wilhelmshaven, Discokugel-Licht,</span>
         <span class="v">im Twister unser erster Kuss – ich vergess ihn nicht.</span>
@@ -416,7 +412,6 @@
     </div>
 
     <div class="stanza">
-      <p class="label">Strophe</p>
       <p>
         <span class="v">Wir haben auch die schweren Tage durchgestanden –</span>
         <span class="v">als Ronja ging, da hielten wir uns fest.</span>
@@ -428,7 +423,6 @@
     </div>
 
     <div class="stanza chorus">
-      <p class="label">Refrain</p>
       <p>
         <span class="v">Anja, du bist unser Zuhaus,</span>
         <span class="v">siehst in allem das Gute und gibst niemals auf.</span>
@@ -438,7 +432,6 @@
     </div>
 
     <div class="stanza">
-      <p class="label">Strophe</p>
       <p>
         <span class="v">Sagt Moritz: &bdquo;Weißt du noch, die Kita-Zeit?</span>
         <span class="v">Ein Franzbrötchen für mich, der Spielplatz nicht mehr weit.&ldquo;</span>
@@ -450,7 +443,6 @@
     </div>
 
     <div class="stanza chorus">
-      <p class="label">Refrain</p>
       <p>
         <span class="v">Anja, du bist unser Zuhaus,</span>
         <span class="v">siehst in allem das Gute und gibst niemals auf.</span>
@@ -460,7 +452,6 @@
     </div>
 
     <div class="stanza">
-      <p class="label">Bridge</p>
       <p>
         <span class="v">Und ich seh dich jeden Tag an meiner Seite stehn,</span>
         <span class="v">wir bauen was zusammen auf – ich hab dich wachsen sehn.</span>
@@ -470,7 +461,6 @@
     </div>
 
     <div class="stanza chorus">
-      <p class="label">Refrain</p>
       <p>
         <span class="v">Anja, du bist unser Zuhaus,</span>
         <span class="v">siehst in allem das Gute und gibst niemals auf.</span>
@@ -483,7 +473,16 @@
 
   <footer>
     <p class="sig">Alles Liebe zum Geburtstag,<br>Matthias, Moritz, Sophia<br>und Kalle</p>
-    <p class="sig-note">Über zwanzig gemeinsame Jahre – und die schönsten kommen noch.</p>
+    <svg class="heart" viewBox="0 0 24 24" role="img" aria-label="In Liebe">
+      <defs>
+        <linearGradient id="goldheart" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffe0a3"/>
+          <stop offset="52%" stop-color="#ffb03a"/>
+          <stop offset="100%" stop-color="#f0761c"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#goldheart)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
   </footer>
 
 </div>
