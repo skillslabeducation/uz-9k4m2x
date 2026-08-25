@@ -82,19 +82,19 @@
   }
   .hero-photo{
     position:relative;
-    aspect-ratio:32/25;
+    aspect-ratio:6/5;
     overflow:hidden;
-    /* ausblendung erst ganz unten, damit sophias gesicht voll sichtbar bleibt */
-    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 88%,rgba(0,0,0,.45) 96%,transparent 100%);
-    mask-image:linear-gradient(180deg,#000 0%,#000 88%,rgba(0,0,0,.45) 96%,transparent 100%);
+    /* nur noch ein hauch ausblendung ganz unten, damit die wellen stehen bleiben */
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 95%,rgba(0,0,0,.6) 99%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 95%,rgba(0,0,0,.6) 99%,transparent 100%);
   }
   .hero-photo img{
     position:absolute;
     left:0;
     /* leichte uebergroesse, damit der bildinhalt 5% nach oben ruecken kann */
-    top:-5%;
+    top:-2%;
     width:100%;
-    height:106%;
+    height:103%;
     object-fit:cover;
     object-position:center 42%;
     display:block;
@@ -108,8 +108,8 @@
     background:linear-gradient(180deg,
       rgba(8,15,22,.30) 0%,
       rgba(8,15,22,.03) 30%,
-      rgba(8,15,22,.08) 78%,
-      rgba(8,15,22,.58) 100%);
+      rgba(8,15,22,.04) 88%,
+      rgba(8,15,22,.34) 100%);
   }
 
   .hero-text{
@@ -476,7 +476,7 @@
   </main>
 
   <footer>
-    <p class="sig">Alles Liebe zum Geburtstag,<br>Matthias, Moritz, Sophia<br>und Kalle</p>
+    <p class="sig">Alles Liebe zum Geburtstag,<br>Moritz, Sophia, Kalle<br>und Matthias</p>
     <svg class="heart" viewBox="0 0 24 24" role="img" aria-label="In Liebe">
       <defs>
         <linearGradient id="goldheart" x1="0" y1="0" x2="0" y2="1">
