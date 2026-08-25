@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="theme-color" content="#0a131b">
+<title>Unser Zuhaus – für Anja</title>
+<meta name="description" content="Ein Lied für Anja.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-top:#182734;
+    --night:#101c26;
+    --night-deep:#080f16;
+    --amber:#ff8a3d;
+    --gold:#ffc25c;
+    --sun:#ffb03a;
+    --cream:#f7ede0;
+    --cream-70:rgba(247,237,224,.70);
+    --cream-45:rgba(247,237,224,.45);
+    --cream-18:rgba(247,237,224,.18);
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --display:"Fraunces",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    font-family:var(--serif);
+    background:var(--night-deep);
+    color:var(--cream);
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* atmosphäre: nachthimmel mit warmem horizont */
+  .sky{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+      radial-gradient(120% 55% at 50% 108%, rgba(255,138,61,.30) 0%, rgba(255,138,61,.09) 38%, transparent 68%),
+      linear-gradient(180deg, var(--night-top) 0%, var(--night) 45%, var(--night-deep) 100%);
+    transition:opacity 1.6s ease;
+  }
+  .sky::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(90% 40% at 50% 104%, rgba(255,196,92,.34), transparent 62%);
+    opacity:0;
+    transition:opacity 2.2s ease;
+  }
+  body.is-playing .sky::after{opacity:1}
+
+  /* feines korn für wärme */
+  .grain{
+    position:fixed;
+    inset:-50%;
+    z-index:-1;
+    pointer-events:none;
+    opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{
+    max-width:34rem;
+    margin:0 auto;
+    padding:0 1.5rem calc(9rem + env(safe-area-inset-bottom));
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    margin:0 -1.5rem 0;
+  }
+  .hero-photo{
+    position:relative;
+    aspect-ratio:16/10;
+    overflow:hidden;
+  }
+  .hero-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 38%;
+    display:block;
+    animation:slowdrift 26s ease-in-out infinite alternate;
+  }
+  @keyframes slowdrift{from{transform:scale(1.04)}to{transform:scale(1.11)}}
+  .hero-photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,
+      rgba(8,15,22,.30) 0%,
+      rgba(8,15,22,.05) 26%,
+      rgba(8,15,22,.55) 68%,
+      var(--night-deep) 99%);
+  }
+
+  .hero-text{
+    position:relative;
+    text-align:center;
+    margin-top:-2.5rem;
+    padding:0 .5rem;
+  }
+
+  .eyebrow{
+    font-family:var(--serif);
+    font-size:.7rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:.9rem;
+    padding-left:.42em;
+  }
+
+  h1{
+    font-family:var(--display);
+    font-variation-settings:"SOFT" 60,"WONK" 1,"opsz" 120;
+    font-weight:340;
+    font-size:clamp(2.9rem,15vw,4.2rem);
+    line-height:1.02;
+    letter-spacing:-.022em;
+    color:var(--cream);
+    text-shadow:0 2px 40px rgba(8,15,22,.9);
+  }
+
+  .dedication{
+    margin-top:1.1rem;
+    font-size:.95rem;
+    font-style:italic;
+    color:var(--cream-70);
+  }
+
+  .rule{
+    width:3.5rem;
+    height:1px;
+    margin:2rem auto 0;
+    background:linear-gradient(90deg,transparent,var(--cream-18) 22%,var(--gold) 50%,var(--cream-18) 78%,transparent);
+  }
+
+  /* ---------- player ---------- */
+  .player{
+    margin-top:2.6rem;
+    text-align:center;
+  }
+
+  .play-btn{
+    position:relative;
+    width:5.5rem;
+    height:5.5rem;
+    border:0;
+    border-radius:50%;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    background:radial-gradient(circle at 36% 28%, #ffe0a3 0%, var(--sun) 46%, #f0701c 100%);
+    box-shadow:
+      0 0 3.5rem rgba(255,150,60,.42),
+      0 .6rem 2rem rgba(8,15,22,.55),
+      inset 0 -.15rem .5rem rgba(180,70,10,.35);
+    -webkit-tap-highlight-color:transparent;
+    transition:transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .4s ease;
+  }
+  .play-btn::before{
+    content:"";
+    position:absolute;
+    inset:-.55rem;
+    border-radius:50%;
+    border:1px solid rgba(255,176,58,.30);
+    animation:halo 3.6s ease-in-out infinite;
+  }
+  @keyframes halo{
+    0%,100%{transform:scale(1);opacity:.75}
+    50%{transform:scale(1.09);opacity:.25}
+  }
+  body.is-playing .play-btn::before{animation:none;opacity:0}
+  .play-btn:active{transform:scale(.94)}
+
+  .play-btn svg{
+    width:2rem;
+    height:2rem;
+    fill:#2a1405;
+    margin-left:.22rem;
+    transition:opacity .2s ease;
+  }
+  .play-btn .icon-pause{display:none;margin-left:0}
+  body.is-playing .play-btn .icon-play{display:none}
+  body.is-playing .play-btn .icon-pause{display:block}
+
+  .progress{
+    margin:2.1rem auto 0;
+    max-width:20rem;
+    padding:.7rem 0;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .track{
+    position:relative;
+    height:3px;
+    border-radius:2px;
+    background:var(--cream-18);
+    overflow:hidden;
+  }
+  .fill{
+    position:absolute;
+    inset:0 auto 0 0;
+    width:0%;
+    border-radius:2px;
+    background:linear-gradient(90deg,var(--amber),var(--gold));
+    box-shadow:0 0 .8rem rgba(255,176,58,.6);
+  }
+  .times{
+    display:flex;
+    justify-content:space-between;
+    margin-top:.65rem;
+    font-size:.72rem;
+    letter-spacing:.12em;
+    color:var(--cream-45);
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- sticky mini-player ---------- */
+  .mini{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    gap:.9rem;
+    padding:.8rem 1.25rem calc(.8rem + env(safe-area-inset-bottom));
+    background:rgba(10,19,27,.82);
+    backdrop-filter:blur(18px) saturate(1.3);
+    -webkit-backdrop-filter:blur(18px) saturate(1.3);
+    border-top:1px solid var(--cream-18);
+    transform:translateY(110%);
+    transition:transform .42s cubic-bezier(.4,0,.2,1);
+  }
+  .mini.show{transform:translateY(0)}
+
+  .mini-btn{
+    flex:0 0 auto;
+    width:2.85rem;height:2.85rem;
+    border:0;border-radius:50%;
+    display:grid;place-items:center;
+    background:radial-gradient(circle at 36% 28%, #ffe0a3, var(--sun) 52%, #f0701c);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .mini-btn svg{width:1.05rem;height:1.05rem;fill:#2a1405;margin-left:.12rem}
+  .mini-btn .icon-pause{display:none;margin-left:0}
+  body.is-playing .mini-btn .icon-play{display:none}
+  body.is-playing .mini-btn .icon-pause{display:block}
+
+  .mini-body{flex:1 1 auto;min-width:0}
+  .mini-title{
+    font-family:var(--display);
+    font-variation-settings:"SOFT" 60,"opsz" 24;
+    font-size:.9rem;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .mini-track{
+    height:2px;margin-top:.4rem;border-radius:2px;
+    background:var(--cream-18);position:relative;overflow:hidden;
+  }
+  .mini-fill{
+    position:absolute;inset:0 auto 0 0;width:0%;
+    background:linear-gradient(90deg,var(--amber),var(--gold));
+  }
+
+  /* ---------- lyrics ---------- */
+  .lyrics{margin-top:4.5rem}
+
+  .stanza{margin-bottom:2.9rem}
+
+  .label{
+    font-size:.62rem;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--cream-45);
+    margin-bottom:.85rem;
+    padding-left:.34em;
+  }
+
+  .stanza p{
+    font-size:1.075rem;
+    line-height:1.92;
+    color:var(--cream);
+    letter-spacing:.004em;
+  }
+
+  .stanza.chorus{
+    padding-left:1.15rem;
+    border-left:1px solid rgba(255,176,58,.42);
+  }
+  .stanza.chorus .label{color:var(--gold)}
+  .stanza.chorus p{
+    font-style:italic;
+    color:#fff4e4;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:1rem;
+    padding-top:2.8rem;
+    border-top:1px solid var(--cream-18);
+    text-align:center;
+  }
+  .sig{
+    font-family:var(--display);
+    font-variation-settings:"SOFT" 80,"WONK" 1,"opsz" 60;
+    font-size:1.4rem;
+    font-weight:340;
+    line-height:1.5;
+    color:var(--cream);
+  }
+  .sig-note{
+    margin-top:.9rem;
+    font-size:.8rem;
+    font-style:italic;
+    color:var(--cream-45);
+  }
+
+  /* ---------- reveal ---------- */
+  .r{
+    opacity:0;
+    transform:translateY(1.4rem);
+    animation:rise .95s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:none}}
+  .d1{animation-delay:.15s}
+  .d2{animation-delay:.32s}
+  .d3{animation-delay:.5s}
+  .d4{animation-delay:.68s}
+
+  @media (prefers-reduced-motion:reduce){
+    .r{animation:none;opacity:1;transform:none}
+    .hero-photo img{animation:none}
+    .play-btn::before{animation:none}
+    *{transition-duration:.01ms !important}
+  }
+
+  @media (min-width:35rem){
+    .wrap{padding-left:2rem;padding-right:2rem}
+    .hero{margin-left:-2rem;margin-right:-2rem}
+    .hero-photo{aspect-ratio:16/9;border-radius:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="sky"></div>
+<div class="grain"></div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-photo r">
+      <img src="foto.jpg" alt="Matthias mit Moritz und Sophia am Strand bei Sonnenuntergang" width="1400" height="788">
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow r d1">Für Anja</p>
+      <h1 class="r d2">Unser Zuhaus</h1>
+      <p class="dedication r d3">Ein Lied zum 44. Geburtstag</p>
+      <div class="rule r d3"></div>
+    </div>
+  </header>
+
+  <section class="player r d4">
+    <button class="play-btn" id="playBtn" aria-label="Lied abspielen">
+      <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.29-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h3.5v16H7zm6.5 0H17v16h-3.5z"/></svg>
+    </button>
+
+    <div class="progress" id="progress" role="slider" tabindex="0"
+         aria-label="Position im Lied" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="times">
+        <span id="cur">0:00</span>
+        <span id="dur">4:00</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="lyrics">
+
+    <div class="stanza">
+      <p class="label">Strophe</p>
+      <p>Wilhelmshaven, Discokugel-Licht,<br>
+      im Twister unser erster Kuss – ich vergess ihn nicht.<br>
+      Du gingst nach Bielefeld, ich blieb im Norden stehn,<br>
+      doch jedes Wochenende hieß es: Wiedersehn.</p>
+    </div>
+
+    <div class="stanza">
+      <p class="label">Strophe</p>
+      <p>Wir haben auch die schweren Tage durchgestanden –<br>
+      als Ronja ging, da hielten wir uns fest.<br>
+      Am Graumannsweg dann unser erstes Dach,<br>
+      in Rom fiel ich aufs Knie – du sagtest Ja.<br>
+      Und dann das größte Wunder unsrer Jahre:<br>
+      erst Moritz, dann Sophia – unser ganzes Glück.</p>
+    </div>
+
+    <div class="stanza chorus">
+      <p class="label">Refrain</p>
+      <p>Anja, du bist unser Zuhaus,<br>
+      siehst in allem das Gute und gibst niemals auf.<br>
+      Du bist für jeden von uns immer da –<br>
+      wir haben dich unendlich lieb, heut und jedes Jahr.</p>
+    </div>
+
+    <div class="stanza">
+      <p class="label">Strophe</p>
+      <p>Sagt Moritz: &bdquo;Weißt du noch, die Kita-Zeit?<br>
+      Ein Franzbrötchen für mich, der Spielplatz nicht mehr weit.&ldquo;<br>
+      Sophia lacht: &bdquo;Wir backen, du und ich –<br>
+      und den Teig aus der Schüssel, den nasch natürlich ich.&ldquo;<br>
+      Und unser Kalle wedelt wild an der Tür –<br>
+      der Kleine freut sich nirgends so wie hier bei dir.</p>
+    </div>
+
+    <div class="stanza chorus">
+      <p class="label">Refrain</p>
+      <p>Anja, du bist unser Zuhaus,<br>
+      siehst in allem das Gute und gibst niemals auf.<br>
+      Du bist für jeden von uns immer da –<br>
+      wir haben dich unendlich lieb, heut und jedes Jahr.</p>
+    </div>
+
+    <div class="stanza">
+      <p class="label">Bridge</p>
+      <p>Und ich seh dich jeden Tag an meiner Seite stehn,<br>
+      wir bauen was zusammen auf – ich hab dich wachsen sehn.<br>
+      Aus Träumen wurden Pläne, aus Plänen wurde mehr –<br>
+      mit dir an meiner Seite fällt kein Anfang schwer.</p>
+    </div>
+
+    <div class="stanza chorus">
+      <p class="label">Refrain</p>
+      <p>Anja, du bist unser Zuhaus,<br>
+      siehst in allem das Gute und gibst niemals auf.<br>
+      Vierundvierzig Kerzen brennen heut für dich –<br>
+      wir haben dich unendlich lieb: Moritz, Sophia, Kalle und ich.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="sig">Alles Liebe zum Geburtstag,<br>Matthias, Moritz, Sophia<br>und Kalle</p>
+    <p class="sig-note">Über zwanzig gemeinsame Jahre – und die schönsten kommen noch.</p>
+  </footer>
+
+</div>
+
+<div class="mini" id="mini">
+  <button class="mini-btn" id="miniBtn" aria-label="Abspielen oder pausieren">
+    <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.29-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h3.5v16H7zm6.5 0H17v16h-3.5z"/></svg>
+  </button>
+  <div class="mini-body">
+    <div class="mini-title">Unser Zuhaus</div>
+    <div class="mini-track"><div class="mini-fill" id="miniFill"></div></div>
+  </div>
+</div>
+
+<audio id="audio" src="unser-zuhaus.mp3" preload="metadata"></audio>
+
+<script>
+(function(){
+  var audio    = document.getElementById('audio');
+  var playBtn  = document.getElementById('playBtn');
+  var miniBtn  = document.getElementById('miniBtn');
+  var progress = document.getElementById('progress');
+  var fill     = document.getElementById('fill');
+  var miniFill = document.getElementById('miniFill');
+  var curEl    = document.getElementById('cur');
+  var durEl    = document.getElementById('dur');
+  var mini     = document.getElementById('mini');
+  var playerEl = document.querySelector('.player');
+
+  function fmt(s){
+    if(!isFinite(s) || s < 0) s = 0;
+    var m = Math.floor(s / 60);
+    var r = Math.floor(s % 60);
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+
+  function toggle(){
+    if(audio.paused){
+      audio.play().catch(function(){});
+    } else {
+      audio.pause();
+    }
+  }
+
+  playBtn.addEventListener('click', toggle);
+  miniBtn.addEventListener('click', toggle);
+
+  audio.addEventListener('play', function(){
+    document.body.classList.add('is-playing');
+    playBtn.setAttribute('aria-label','Lied pausieren');
+  });
+  audio.addEventListener('pause', function(){
+    document.body.classList.remove('is-playing');
+    playBtn.setAttribute('aria-label','Lied abspielen');
+  });
+  audio.addEventListener('ended', function(){
+    document.body.classList.remove('is-playing');
+    audio.currentTime = 0;
+  });
+
+  audio.addEventListener('loadedmetadata', function(){
+    durEl.textContent = fmt(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', function(){
+    var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    fill.style.width = pct + '%';
+    miniFill.style.width = pct + '%';
+    curEl.textContent = fmt(audio.currentTime);
+    progress.setAttribute('aria-valuenow', Math.round(pct));
+  });
+
+  // springen per tap/klick
+  function seekFromEvent(e){
+    if(!audio.duration) return;
+    var box = progress.querySelector('.track').getBoundingClientRect();
+    var x = (e.touches ? e.touches[0].clientX : e.clientX) - box.left;
+    var ratio = Math.min(1, Math.max(0, x / box.width));
+    audio.currentTime = ratio * audio.duration;
+  }
+  progress.addEventListener('click', seekFromEvent);
+
+  // pfeiltasten für tastaturbedienung
+  progress.addEventListener('keydown', function(e){
+    if(!audio.duration) return;
+    if(e.key === 'ArrowRight'){ audio.currentTime = Math.min(audio.duration, audio.currentTime + 5); e.preventDefault(); }
+    if(e.key === 'ArrowLeft'){  audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
+  });
+
+  // mini-player einblenden, sobald der grosse aus dem blick ist
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      mini.classList.toggle('show', !entries[0].isIntersecting);
+    }, {threshold:0}).observe(playerEl);
+  }
+})();
+</script>
+
+</body>
+</html>
