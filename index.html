@@ -84,6 +84,9 @@
     position:relative;
     aspect-ratio:16/10;
     overflow:hidden;
+    /* foto weich in den hintergrund ausblenden statt hart abschneiden */
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 46%,rgba(0,0,0,.5) 78%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 46%,rgba(0,0,0,.5) 78%,transparent 100%);
   }
   .hero-photo img{
     width:100%;
@@ -99,10 +102,10 @@
     position:absolute;
     inset:0;
     background:linear-gradient(180deg,
-      rgba(8,15,22,.30) 0%,
-      rgba(8,15,22,.05) 26%,
-      rgba(8,15,22,.55) 68%,
-      var(--night-deep) 99%);
+      rgba(8,15,22,.32) 0%,
+      rgba(8,15,22,.04) 28%,
+      rgba(8,15,22,.34) 72%,
+      rgba(8,15,22,.55) 100%);
   }
 
   .hero-text{
@@ -160,7 +163,7 @@
     border:0;
     border-radius:50%;
     cursor:pointer;
-    display:grid;
+    display:inline-grid;
     place-items:center;
     background:radial-gradient(circle at 36% 28%, #ffe0a3 0%, var(--sun) 46%, #f0701c 100%);
     box-shadow:
@@ -291,10 +294,16 @@
   }
 
   .stanza p{
-    font-size:1.075rem;
-    line-height:1.92;
+    font-size:1.02rem;
+    line-height:1.88;
     color:var(--cream);
     letter-spacing:.004em;
+  }
+  /* jede verszeile eigenstaendig: nur der weiche umbruch wird eingerueckt */
+  .stanza .v{
+    display:block;
+    padding-left:1.2rem;
+    text-indent:-1.2rem;
   }
 
   .stanza.chorus{
@@ -327,6 +336,10 @@
     font-size:.8rem;
     font-style:italic;
     color:var(--cream-45);
+    text-wrap:balance;
+    max-width:20rem;
+    margin-left:auto;
+    margin-right:auto;
   }
 
   /* ---------- reveal ---------- */
@@ -394,62 +407,76 @@
 
     <div class="stanza">
       <p class="label">Strophe</p>
-      <p>Wilhelmshaven, Discokugel-Licht,<br>
-      im Twister unser erster Kuss – ich vergess ihn nicht.<br>
-      Du gingst nach Bielefeld, ich blieb im Norden stehn,<br>
-      doch jedes Wochenende hieß es: Wiedersehn.</p>
+      <p>
+        <span class="v">Wilhelmshaven, Discokugel-Licht,</span>
+        <span class="v">im Twister unser erster Kuss – ich vergess ihn nicht.</span>
+        <span class="v">Du gingst nach Bielefeld, ich blieb im Norden stehn,</span>
+        <span class="v">doch jedes Wochenende hieß es: Wiedersehn.</span>
+      </p>
     </div>
 
     <div class="stanza">
       <p class="label">Strophe</p>
-      <p>Wir haben auch die schweren Tage durchgestanden –<br>
-      als Ronja ging, da hielten wir uns fest.<br>
-      Am Graumannsweg dann unser erstes Dach,<br>
-      in Rom fiel ich aufs Knie – du sagtest Ja.<br>
-      Und dann das größte Wunder unsrer Jahre:<br>
-      erst Moritz, dann Sophia – unser ganzes Glück.</p>
+      <p>
+        <span class="v">Wir haben auch die schweren Tage durchgestanden –</span>
+        <span class="v">als Ronja ging, da hielten wir uns fest.</span>
+        <span class="v">Am Graumannsweg dann unser erstes Dach,</span>
+        <span class="v">in Rom fiel ich aufs Knie – du sagtest Ja.</span>
+        <span class="v">Und dann das größte Wunder unsrer Jahre:</span>
+        <span class="v">erst Moritz, dann Sophia – unser ganzes Glück.</span>
+      </p>
     </div>
 
     <div class="stanza chorus">
       <p class="label">Refrain</p>
-      <p>Anja, du bist unser Zuhaus,<br>
-      siehst in allem das Gute und gibst niemals auf.<br>
-      Du bist für jeden von uns immer da –<br>
-      wir haben dich unendlich lieb, heut und jedes Jahr.</p>
+      <p>
+        <span class="v">Anja, du bist unser Zuhaus,</span>
+        <span class="v">siehst in allem das Gute und gibst niemals auf.</span>
+        <span class="v">Du bist für jeden von uns immer da –</span>
+        <span class="v">wir haben dich unendlich lieb, heut und jedes Jahr.</span>
+      </p>
     </div>
 
     <div class="stanza">
       <p class="label">Strophe</p>
-      <p>Sagt Moritz: &bdquo;Weißt du noch, die Kita-Zeit?<br>
-      Ein Franzbrötchen für mich, der Spielplatz nicht mehr weit.&ldquo;<br>
-      Sophia lacht: &bdquo;Wir backen, du und ich –<br>
-      und den Teig aus der Schüssel, den nasch natürlich ich.&ldquo;<br>
-      Und unser Kalle wedelt wild an der Tür –<br>
-      der Kleine freut sich nirgends so wie hier bei dir.</p>
+      <p>
+        <span class="v">Sagt Moritz: &bdquo;Weißt du noch, die Kita-Zeit?</span>
+        <span class="v">Ein Franzbrötchen für mich, der Spielplatz nicht mehr weit.&ldquo;</span>
+        <span class="v">Sophia lacht: &bdquo;Wir backen, du und ich –</span>
+        <span class="v">und den Teig aus der Schüssel, den nasch natürlich ich.&ldquo;</span>
+        <span class="v">Und unser Kalle wedelt wild an der Tür –</span>
+        <span class="v">der Kleine freut sich nirgends so wie hier bei dir.</span>
+      </p>
     </div>
 
     <div class="stanza chorus">
       <p class="label">Refrain</p>
-      <p>Anja, du bist unser Zuhaus,<br>
-      siehst in allem das Gute und gibst niemals auf.<br>
-      Du bist für jeden von uns immer da –<br>
-      wir haben dich unendlich lieb, heut und jedes Jahr.</p>
+      <p>
+        <span class="v">Anja, du bist unser Zuhaus,</span>
+        <span class="v">siehst in allem das Gute und gibst niemals auf.</span>
+        <span class="v">Du bist für jeden von uns immer da –</span>
+        <span class="v">wir haben dich unendlich lieb, heut und jedes Jahr.</span>
+      </p>
     </div>
 
     <div class="stanza">
       <p class="label">Bridge</p>
-      <p>Und ich seh dich jeden Tag an meiner Seite stehn,<br>
-      wir bauen was zusammen auf – ich hab dich wachsen sehn.<br>
-      Aus Träumen wurden Pläne, aus Plänen wurde mehr –<br>
-      mit dir an meiner Seite fällt kein Anfang schwer.</p>
+      <p>
+        <span class="v">Und ich seh dich jeden Tag an meiner Seite stehn,</span>
+        <span class="v">wir bauen was zusammen auf – ich hab dich wachsen sehn.</span>
+        <span class="v">Aus Träumen wurden Pläne, aus Plänen wurde mehr –</span>
+        <span class="v">mit dir an meiner Seite fällt kein Anfang schwer.</span>
+      </p>
     </div>
 
     <div class="stanza chorus">
       <p class="label">Refrain</p>
-      <p>Anja, du bist unser Zuhaus,<br>
-      siehst in allem das Gute und gibst niemals auf.<br>
-      Vierundvierzig Kerzen brennen heut für dich –<br>
-      wir haben dich unendlich lieb: Moritz, Sophia, Kalle und ich.</p>
+      <p>
+        <span class="v">Anja, du bist unser Zuhaus,</span>
+        <span class="v">siehst in allem das Gute und gibst niemals auf.</span>
+        <span class="v">Vierundvierzig Kerzen brennen heut für dich –</span>
+        <span class="v">wir haben dich unendlich lieb: Moritz, Sophia, Kalle und ich.</span>
+      </p>
     </div>
 
   </main>
